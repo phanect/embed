@@ -15,7 +15,7 @@ import { SimpleStyle } from './lib/simplestyle';
 import * as pmtiles from 'pmtiles';
 
 export { GeoloniaMap as Map, GeoloniaMarker as Marker };
-export type * from './types';
+export type * from './types/public';
 export type { GeoloniaMapOptions } from './lib/geolonia-map';
 
 const protocol = new pmtiles.Protocol();

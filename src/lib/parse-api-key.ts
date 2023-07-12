@@ -1,5 +1,5 @@
 import urlParse from 'url-parse';
-import { Geolonia } from '../types';
+import { Geolonia } from '../types/public';
 
 function getParsedApiKey() {
   const geolonia: Geolonia = window.geolonia || {};
