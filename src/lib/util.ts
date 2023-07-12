@@ -1,5 +1,6 @@
 'use strict';
 
+import { GeoloniaMapOptions } from './geolonia-map';
 import { parseApiKey } from './parse-api-key';
 import type { MapOptions, MarkerOptions } from 'maplibre-gl';
 
@@ -115,7 +116,7 @@ export function isScrollable() {
  *
  * @param {*} o
  */
-export function isDomElement(o: unknown): boolean {
+export function isDomElement(o: unknown): o is HTMLElement {
   return (
     typeof HTMLElement === 'object' ? (o instanceof HTMLElement) : // DOM2
       !!o && typeof o === 'object' && o !== null && (o as Node).nodeType === 1 && typeof (o as Node).nodeName === 'string'
@@ -129,11 +130,11 @@ export function isDomElement(o: unknown): boolean {
  * @param {*} arg
  * @return {HTMLElement | false}
  */
-export function getContainer(arg) {
+export function getContainer(arg: HTMLElement | string | GeoloniaMapOptions): Element | false {
   if (isDomElement(arg)) {
     return arg;
   } else if (typeof arg === 'string') {
-    const el = document.querySelector(arg) as HTMLElement || document.getElementById(arg);
+    const el = document.querySelector(arg) || document.getElementById(arg);
     return el || false;
 
   } else if (arg.container) {

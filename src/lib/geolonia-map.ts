@@ -13,7 +13,9 @@ import * as util from './util';
 
 import type { MapOptions, StyleOptions, StyleSpecification, StyleSwapOptions } from 'maplibre-gl';
 
-export type GeoloniaMapOptions = Omit<MapOptions, 'style'> & { interactive?: boolean };
+export type GeoloniaMapOptions = Omit<MapOptions, 'style'> & {
+  interactive?: boolean,
+};
 
 const isCssSelector = (string) => {
   if (/^https?:\/\//.test(string)) {
@@ -42,8 +44,12 @@ export default class GeoloniaMap extends maplibregl.Map {
   private geoloniaSourcesUrl: URL;
   private __styleExtensionLoadRequired: boolean;
 
-  constructor(params: string | GeoloniaMapOptions) {
+  constructor(params: HTMLElement | string | GeoloniaMapOptions) {
     const container = util.getContainer(params);
+
+    const isGeoloniaMapOptions = (opts): opts is GeoloniaMapOptions => {
+      return typeof opts === 'object' && !util.isDomElement(opts);
+    };
 
     if (!container) {
       if ( typeof params === 'string') {
@@ -62,7 +68,7 @@ export default class GeoloniaMap extends maplibregl.Map {
       console.warn('[Geolonia] Embed API failed to render the map because the container has no height. Please set the CSS property `height` to the container.');
     }
 
-    const atts = parseAtts(container, { interactive: typeof params === 'object' ? params.interactive : true });
+    const atts = parseAtts(container, { interactive: typeof params === 'object' && !util.isDomElement(params) ? params.interactive : true });
     const options = util.getOptions(container, params, atts);
 
     // Getting content should be fire just before initialize the map.

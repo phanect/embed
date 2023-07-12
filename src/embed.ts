@@ -41,7 +41,7 @@ if ( util.checkPermission() ) {
    *
    * @param {HTMLElement} target
    */
-  const renderGeoloniaMap = (target: HTMLElement) => {
+  const renderGeoloniaMap = (target: Element) => {
     const map = new GeoloniaMap(target);
 
     // detect if the map removed manually
