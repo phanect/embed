@@ -12,7 +12,7 @@ function getParsedApiKey() {
   return null;
 }
 
-function initApiKey(document) {
+function initApiKey(document): { key: string, stage: string } {
   if (typeof window.geolonia === 'undefined') {
     window.geolonia = {};
   }
@@ -68,7 +68,7 @@ function initApiKey(document) {
  * @param {Document} document
  * @returns { key: string, stage: string }
  */
-export function parseApiKey(document) {
+export function parseApiKey(document): { key: string, stage: string } {
   const apiKey = getParsedApiKey();
   if (apiKey) {
     return apiKey;

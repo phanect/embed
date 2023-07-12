@@ -8,7 +8,7 @@ import type { MapOptions, MarkerOptions } from 'maplibre-gl';
  * @param {string} str target URL string
  * @return {string|false} Resolved URL or false if not resolved
  */
-export function isURL(str) {
+export function isURL(str: string): string | false {
   if (str.match(/^https?:\/\//)) {
     return str;
   } else if (str.match(/^\//) || str.match(/^\.\.?/)) {
@@ -76,7 +76,7 @@ export function checkPermission() {
    *  So, it should be catched.
    */
   try {
-    if (window.self.location.origin === window.top.location.origin) {
+    if (window.self.location.origin === window.top?.location.origin) {
       return true;
     }
   } catch (e) {
@@ -115,10 +115,10 @@ export function isScrollable() {
  *
  * @param {*} o
  */
-export function isDomElement(o) {
+export function isDomElement(o: unknown): boolean {
   return (
-    typeof HTMLElement === 'object' ? o instanceof HTMLElement : // DOM2
-      o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string'
+    typeof HTMLElement === 'object' ? (o instanceof HTMLElement) : // DOM2
+      !!o && typeof o === 'object' && o !== null && (o as Node).nodeType === 1 && typeof (o as Node).nodeName === 'string'
   );
 }
 
@@ -167,7 +167,7 @@ export function handleMarkerOptions(options: MarkerOptions | null | undefined | 
   return options;
 }
 
-export function getStyle(style, atts) {
+export function getStyle(style: string, atts): string {
   const styleUrl = isURL(style);
   if (styleUrl) {
     return styleUrl;

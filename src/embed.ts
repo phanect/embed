@@ -13,17 +13,24 @@ import { parseApiKey } from './lib/parse-api-key';
 import pkg from '../package.json';
 import { SimpleStyle } from './lib/simplestyle';
 import * as pmtiles from 'pmtiles';
+import type { Attributes } from './types/internal';
 
 export { GeoloniaMap as Map, GeoloniaMarker as Marker };
 export type * from './types/public';
 export type { GeoloniaMapOptions } from './lib/geolonia-map';
+
+type AlreadyRenderedMap = {
+  map: GeoloniaMap,
+  target: Element,
+  atts: Attributes,
+};
 
 const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', protocol.tile);
 
 if ( util.checkPermission() ) {
   let isDOMContentLoaded = false;
-  const alreadyRenderedMaps = [];
+  const alreadyRenderedMaps: AlreadyRenderedMap[] = [];
   const plugins = [];
   const isRemoved = Symbol('map-is-removed');
 
@@ -34,7 +41,7 @@ if ( util.checkPermission() ) {
    *
    * @param {HTMLElement} target
    */
-  const renderGeoloniaMap = (target) => {
+  const renderGeoloniaMap = (target: HTMLElement) => {
     const map = new GeoloniaMap(target);
 
     // detect if the map removed manually
