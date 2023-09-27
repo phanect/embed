@@ -1,5 +1,6 @@
 const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { dependencies } = require('./package.json');
 
 module.exports = {
   entry: {
@@ -39,4 +40,8 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
+  externals: Object.keys(dependencies).reduce((acc, dep) => {
+    acc[dep] = dep;
+    return acc;
+  }, {}),
 };
