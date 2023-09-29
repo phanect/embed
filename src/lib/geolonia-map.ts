@@ -42,7 +42,6 @@ const isCssSelector = (string) => {
  * @param container
  */
 export default class GeoloniaMap extends maplibregl.Map {
-  private geoloniaSourcesUrl: URL;
   private __styleExtensionLoadRequired: boolean;
 
   constructor(params: string | GeoloniaMapOptions) {
@@ -145,7 +144,6 @@ export default class GeoloniaMap extends maplibregl.Map {
     // Generate Map
     super(options);
     const map = this;
-    this.geoloniaSourcesUrl = sourcesUrl;
     this.__styleExtensionLoadRequired = true;
 
     // Note: GeoloniaControl should be placed before another controls.
