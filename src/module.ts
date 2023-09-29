@@ -12,8 +12,6 @@ import { keyring } from './lib/keyring';
 
 export type { GeoloniaMapOptions } from './lib/geolonia-map';
 
-export type Popup = maplibregl.Popup;
-
 export type EmbedAttributes = {
   lat: string;
   lng: string;
@@ -78,6 +76,8 @@ declare global {
     mapboxgl?: Geolonia,
   }
 }
+
+export const Popup = maplibregl.Popup;
 
 export {
   geolonia,
