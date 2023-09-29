@@ -55,9 +55,9 @@ export default class GeoloniaMap extends maplibregl.Map {
       }
     }
 
-    if (container.geoloniaMap) {
-      return container.geoloniaMap;
-    }
+    // if (container.geoloniaMap) {
+    //   return container.geoloniaMap;
+    // }
 
     if (container.clientHeight === 0) {
       // eslint-disable-next-line no-console
@@ -275,8 +275,6 @@ export default class GeoloniaMap extends maplibregl.Map {
     });
 
     container.geoloniaMap = map;
-
-    return map;
   }
 
   /**
